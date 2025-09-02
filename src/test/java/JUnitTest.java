@@ -22,4 +22,26 @@ public class JUnitTest {
 		// check name1 is not equal name3
 		assertThat(name1).isNotEqualTo(name3);
 	}
+
+	@Test
+	public void junitTest2() {
+		int number1 = 15;
+		int number2 = 0;
+		int number3 = -5;
+
+		// check number1 is positive
+		assertThat(number1).isPositive();
+
+		// check number2 is zero
+		assertThat(number2).isZero();
+
+		// check number3 is negative
+		assertThat(number3).isNegative();
+
+		// check number1 is greater than number2
+		assertThat(number1).isGreaterThan(number2);
+
+		// check number3 is less than number2
+		assertThat(number3).isLessThan(number2);
+	}
 }
