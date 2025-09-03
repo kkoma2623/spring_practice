@@ -79,9 +79,18 @@ class QuizControllerTest {
 			.andExpect(content().string("Forbidden!"));
 	}
 
-	@DisplayName("quiz(): POST /quiz에 요청 본문이 {\"value\":13 이면 응답 코드는 200, 응답 본문은 OKß!를 리턴한다.")
+	@DisplayName("quiz(): POST /quiz에 요청 본문이 {\"value\":13 이면 응답 코드는 200, 응답 본문은 OK!를 리턴한다.")
 	@Test
 	void postQuiz2() throws Exception {
+		// given
+		final String url = "/quiz";
 
+		// when
+		ResultActions result = mockMvc.perform(post(url).contentType(MediaType.APPLICATION_JSON)
+			.content(objectMapper.writeValueAsString(new Code(13))));
+
+		// then
+		result.andExpect(status().isOk())
+			.andExpect(content().string("OK!"));
 	}
 }
