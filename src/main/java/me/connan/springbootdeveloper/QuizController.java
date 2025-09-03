@@ -13,7 +13,7 @@ public class QuizController {
 	@GetMapping("/quiz")
 	public ResponseEntity<String> quiz(@RequestParam("code") int code) {
 		return switch (code) {
-			case 1 -> ResponseEntity.created(null).body("Created");
+			case 1 -> ResponseEntity.created(null).body("Created!");
 			case 2 -> ResponseEntity.badRequest().body("Bad Request!");
 			default -> ResponseEntity.ok().body("OK!");
 		};
