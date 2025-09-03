@@ -63,4 +63,16 @@ class MemberRepositoryTest {
 		assert (foundMember != null);
 		assertThat(foundMember.getId()).isEqualTo(member.getId());
 	}
+
+	@Test
+	void saveMembers() {
+		// given
+		List<Member> members = List.of(new Member(2L, "B"), new Member(3L, "C"));
+
+		// when
+		memberRepository.saveAll(members);
+
+		// then
+		assertThat(memberRepository.count()).isEqualTo(2);
+	}
 }
