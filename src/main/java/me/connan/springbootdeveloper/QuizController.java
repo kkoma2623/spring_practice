@@ -21,11 +21,10 @@ public class QuizController {
 
 	@PostMapping("/quiz")
 	public ResponseEntity<String> quiz2(@RequestBody Code code) {
-		switch (code.value()) {
+		return switch (code.value()) {
 			case 1 -> ResponseEntity.status(403).body("Forbidden!");
 			default -> ResponseEntity.ok().body("OK!");
-		}
-		return ResponseEntity.ok().body("OK!");
+		};
 	}
 }
 

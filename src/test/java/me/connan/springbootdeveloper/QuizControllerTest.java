@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -65,7 +66,17 @@ class QuizControllerTest {
 	@DisplayName("quiz(): POST /quiz에 요청 본문이 {\"value\":1 이면 응답 코드는 403, 응답 본문은 Forbidden!를 리턴한다.")
 	@Test
 	void postQuiz1() throws Exception {
-		
+		// given
+		final String url = "/quiz";
+
+		// when
+		ResultActions result = mockMvc.perform(post(url)
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(objectMapper.writeValueAsString(new Code(1))));
+
+		// then
+		result.andExpect(status().isForbidden())
+			.andExpect(content().string("Forbidden!"));
 	}
 
 	@DisplayName("quiz(): POST /quiz에 요청 본문이 {\"value\":13 이면 응답 코드는 200, 응답 본문은 OKß!를 리턴한다.")
