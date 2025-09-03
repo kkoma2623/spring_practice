@@ -86,4 +86,14 @@ class MemberRepositoryTest {
 		// then
 		assertThat(deletedMember).isNull();
 	}
+
+	@Sql("/insert-members.sql")
+	@Test
+	void deleteAllMembers() {
+		// when
+		memberRepository.deleteAll();
+
+		// then
+		assertThat(memberRepository.count()).isEqualTo(0);
+	}
 }
