@@ -48,4 +48,19 @@ class MemberRepositoryTest {
 		assert member != null;
 		assertThat(member.getId()).isEqualTo(2L);
 	}
+
+	@Test
+	void saveMember() {
+		// given
+		Member member = new Member(1L, "A");
+
+		// when
+		memberRepository.save(member);
+		Member foundMember = memberRepository.findById(1L)
+			.orElse(null);
+
+		// then
+		assert (foundMember != null);
+		assertThat(foundMember.getId()).isEqualTo(member.getId());
+	}
 }
