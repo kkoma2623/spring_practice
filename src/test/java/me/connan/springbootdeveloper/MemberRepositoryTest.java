@@ -96,4 +96,22 @@ class MemberRepositoryTest {
 		// then
 		assertThat(memberRepository.count()).isEqualTo(0);
 	}
+
+	@Sql("/insert-members.sql")
+	@Test
+	void updateMember() {
+		// given
+		Member member = memberRepository.findById(2L)
+			.orElse(null);
+
+		// when
+		assert member != null;
+		member.changeName("BC");
+		Member updatedMember = memberRepository.findById(2L)
+			.orElse(null);
+
+		// then
+		assert updatedMember != null;
+		assertThat(updatedMember.getName()).isEqualTo("BC");
+	}
 }
