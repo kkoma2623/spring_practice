@@ -75,4 +75,15 @@ class MemberRepositoryTest {
 		// then
 		assertThat(memberRepository.count()).isEqualTo(2);
 	}
+
+	@Sql("/insert-members.sql")
+	@Test
+	void deleteMemberById() {
+		// when
+		memberRepository.deleteById(2L);
+		Member deletedMember = memberRepository.findById(2L).orElse(null);
+
+		// then
+		assertThat(deletedMember).isNull();
+	}
 }
